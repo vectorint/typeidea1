@@ -10,7 +10,7 @@ from .models import Post, Category, Tag
 
 class PostInline(admin.StackedInline):
 	fields = ('title', 'desc')
-	extra = 1
+	extra = 1 # 额外增加几个
 	model = Post
 
 
