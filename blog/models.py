@@ -24,6 +24,7 @@ class Category(models.Model):
 	def __str__(self):
 		return self.name
 
+
 class Tag(models.Model):
 	STATUS_NORMAL = 1
 	STATUS_DELETE = 0
@@ -42,6 +43,7 @@ class Tag(models.Model):
 
 	def __str__(self):
 		return self.name
+
 
 class Post(models.Model):
 	STATUS_NORMAL = 1
