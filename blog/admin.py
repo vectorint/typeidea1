@@ -2,15 +2,14 @@ from django.contrib import admin
 from django.urls import reverse
 from django.utils.html import format_html
 from .adminforms import PostAdminForm
-
 from .models import Post, Category, Tag
-
+from typeidea.custom_site import custom_site
 
 # Register your models here.
 
 class PostInline(admin.StackedInline):
 	fields = ('title', 'desc')
-	extra = 1 # 额外增加几个
+	extra = 1  # 额外增加几个
 	model = Post
 
 
@@ -49,7 +48,7 @@ class CategoryOwnerFilter(admin.SimpleListFilter):
 		return queryset
 
 
-@admin.register(Post)
+@admin.register(Post, site=custom_site)
 class PostAdmin(admin.ModelAdmin):
 	form = PostAdminForm
 	list_display = [
@@ -89,11 +88,12 @@ class PostAdmin(admin.ModelAdmin):
 			'fields': ('tag',)
 		})
 	)
+
 	# filter_horizontal = ('tag', ) # 多对多字段横向展示
 	# filter_vertical = ('tag', ) # 多对多字段纵向展示
 
 	def operator(self, obj):
-		return format_html('<a href="{}">编辑</a>', reverse('admin:blog_post_change', args=(obj.id,)))
+		return format_html('<a href="{}">编辑</a>', reverse('cus_admin:blog_post_change', args=(obj.id,)))
 
 	operator.short_description = '操作'
 
